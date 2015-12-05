@@ -8,6 +8,7 @@ package coe528.mdp;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -16,14 +17,28 @@ import java.util.Scanner;
  */
 public class User{
     
-    private ArrayList<String> name = new ArrayList<String>();
-    private ArrayList<String> idNum = new ArrayList<String>();
-    private ArrayList<String> password = new ArrayList<String>();
-    private ArrayList<String> balance = new ArrayList<String>();    
+    private String name;
+    private String idNum;
+    private String password;
+    private String balance;    
     String file = "users.txt";
+    private ArrayList<User> database = new ArrayList<User>();
+    private User current;
+    Random rand = new Random();
     
-    public User() {
-       
+    public User(String name, String password, String balance) {
+        String num;
+        this.name=name;
+        num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
+        for (int i=0; i<database.size(); i++) {
+            while (database.get(i).idNum.equals(num)) {
+                num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
+            }            
+        }
+        idNum=num;
+        this.password=password;
+        this.balance=balance;
+        database.add(this);
     }
     
     public void changePassword(String password) {

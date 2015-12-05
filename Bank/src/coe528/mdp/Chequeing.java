@@ -13,18 +13,20 @@ public class Chequeing extends Account {
     
     public static int cheqBal;
     
+    @Override
     public void deposit(int amount) {
         if (amount > 0) {
-        Chequeing.this.cheqBal += amount;
+        Chequeing.cheqBal += amount;
         System.out.println("Your current balance is: " + cheqBal);
         } else {
             System.err.println("You must deposit funds greater than 0$.");
         }
     }
     
+    @Override
     public void withdraw(int amount) {
-        if (Chequeing.this.cheqBal >= amount) {
-        Chequeing.this.cheqBal -= amount;
+        if (Chequeing.cheqBal >= amount) {
+        Chequeing.cheqBal -= amount;
         System.out.println("Your current balance is: " + cheqBal);
         } else {
             System.err.println("Insufficient funds.");
