@@ -39,7 +39,7 @@ public class ATM  {
         }
 
         else if (actNum == 3){
-            //CreditMenu();
+            CreditMenu();
         }
     }
     
@@ -49,12 +49,12 @@ public class ATM  {
             int selection;
             int amount;
             System.out.println("\nChequing menu:");
-            System.out.println("1 - View account balance");
-            System.out.println("2 - Withdraw funds");
-            System.out.println("3 - Deposit funds");
-            System.out.println("4 - Transfer to Saving");            
-            System.out.println("5 - Back to Account Menu");
-            System.out.println("6 - Terminate transaction");
+            System.out.println("1 - View account balance:");
+            System.out.println("2 - Withdraw funds:");
+            System.out.println("3 - Deposit funds:");
+            System.out.println("4 - Transfer to Saving:");            
+            System.out.println("5 - Back to Account Menu:");
+            System.out.println("6 - Terminate transaction:");
             System.out.print("Choice: ");
             Scanner input = new Scanner(System.in);
             selection = input.nextInt();
@@ -94,13 +94,13 @@ public class ATM  {
             Saving s = new Saving();
             int selection;
             int amount;
-            System.out.println("\nSaving menu:");
-            System.out.println("1 - View account balance");
-            System.out.println("2 - Withdraw funds");
-            System.out.println("3 - Deposit funds");
-            System.out.println("4 - Transfer to Chequing");            
-            System.out.println("5 - Back to Account Menu");
-            System.out.println("6 - Terminate transaction");
+            System.out.println("\nSaving menu");
+            System.out.println("1 - View account balance:");
+            System.out.println("2 - Withdraw funds:");
+            System.out.println("3 - Deposit funds:");
+            System.out.println("4 - Transfer to Chequing:");            
+            System.out.println("5 - Back to Account Menu:");
+            System.out.println("6 - Terminate transaction:");
             System.out.print("Choice: ");
             Scanner input = new Scanner(System.in);
             selection = input.nextInt();
@@ -141,12 +141,12 @@ public class ATM  {
             Credit cr = new Credit();
             int selection;
             int amount;
-            System.out.println("\nCredit menu:");
-            System.out.println("1 - View account balance");
-            System.out.println("2 - Withdraw funds");
-            System.out.println("3 - Deposit funds");        
-            System.out.println("4 - Back to Account Menu");
-            System.out.println("5 - Terminate transaction");
+            System.out.println("\nCredit menu");
+            System.out.println("1 - View account balance:");
+            System.out.println("2 - Pay Up Balance:");
+            System.out.println("3 - Pay Bills:");        
+            System.out.println("4 - Back to Account Menu:");
+            System.out.println("5 - Terminate transaction:");
             System.out.print("Choice: ");
             Scanner input = new Scanner(System.in);
             selection = input.nextInt();
@@ -154,19 +154,19 @@ public class ATM  {
             switch(selection)
             {
             case 1:
-                //cr.getSavBal();
+                cr.getCrBal();
                 break;
             case 2:
                 System.out.println("\nEnter amount:");
                 Scanner input2 = new Scanner(System.in);  
                 amount = input2.nextInt();   
-                //cr.withdraw(amount);
+                cr.pay_balance(amount);
                 break;
             case 3:
                 System.out.println("\nEnter amount:");
                 Scanner input3 = new Scanner(System.in); 
                 amount = input3.nextInt();   
-                //cr.deposit(amount);
+                cr.bill_payment(amount);
                 break;
             case 4:
                 selectAccount();
