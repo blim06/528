@@ -42,11 +42,11 @@ public class Chequeing extends Account {
     }
 
     public void setCheqBal(int cheqBal) {
-        this.cheqBal = cheqBal;
+        Chequeing.cheqBal = cheqBal;
     }  
     
     public void transferCheq2Sav(int amount) {        
-        if (Chequeing.this.cheqBal >= amount) {
+        if (Chequeing.cheqBal >= amount) {
         Saving.savBal+=amount;
         System.out.println("Your chequeing balance is: " + cheqBal);
         } else {

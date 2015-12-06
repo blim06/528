@@ -38,7 +38,7 @@ public class Saving extends Account {
     }
     
     public void transferSav2Cheq(int amount) {        
-        if (Saving.this.savBal >= amount) {
+        if (Saving.savBal >= amount) {
         Chequeing.cheqBal+=amount;
         System.out.println("Your savings balance is: " + savBal);
         } else {
