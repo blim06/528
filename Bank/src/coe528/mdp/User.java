@@ -20,35 +20,59 @@ import java.util.Properties;
  */
 public class User{
     
+    /**
+     *
+     */
     protected String name;
+
+    /**
+     *
+     */
     protected String idNum;
+
+    /**
+     *
+     */
     protected String password;
+
+    /**
+     *
+     */
     protected String balance;    
     private static final File file = new File("C:\\Users\\bl\\Documents\\GitHub\\528\\Bank\\src\\coe528\\mdp\\users.properties");
-    private ArrayList<User> database = new ArrayList<User>();
     private User current;
     Random rand = new Random();
     Properties users = new Properties();
     FileOutputStream output;
            
-    
+    /**
+     *Creates an instantance of User with inputs name,
+     * 
+     * @param name
+     * @param password
+     * @param balance
+     * @throws IOException
+     */
     public User(String name, String password, String balance) throws IOException {
         loadProperties(users);
         String num;
         this.name=name;
         num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
-        for (int i=0; i<database.size(); i++) {
-            while (database.get(i).idNum.equals(num)) {
-                num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
-            }            
-        }
+        while (searchUser(num)==true) {
+            num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
+        }        
         idNum=num;
         this.password=password;
         this.balance=balance;
         users.setProperty(idNum, password+","+name+","+balance);
         saveProperties(users);
-        database.add(this);
     }
+    
+    /**Loads the database of registered users
+     * 
+     * @param p properties file containing user information
+     * @throws IOException 
+     */
     
     static void loadProperties(Properties p)throws IOException
     {
@@ -57,17 +81,34 @@ public class User{
             input.close();
 }
     
+    /**Saves any changes done to the databases of users
+     *
+     * @param p properties file containing user information
+     * @throws IOException
+     */
     public static void saveProperties(Properties p)throws IOException
     {
             FileOutputStream output = new FileOutputStream(file);
-            p.store(output,"Properties");
+            p.store(output,"User data");
             output.close();
     }
     
+    /**Lets the current user change their password
+     *
+     * @param password new password to be changed
+     */
     public void changePassword(String password) {
         current.password = password;
     }    
     
+    /**Searches the database for the user with the following <code>idNum</code>
+     * and returns true if the user exists or false if the user
+     * doesn't exist
+     *
+     * @param idNum
+     * @return true if user exists, false if user doesn't exist
+     * @throws IOException when file to read from doesn't exist
+     */
     public boolean searchUser(String idNum) throws IOException {
         loadProperties(users);
         if (users.getProperty(idNum)!=null)  {
@@ -78,7 +119,13 @@ public class User{
         return false;
     }
     
-        
+    /**
+     *
+     * @param idNum id number of the user trying to login
+     * @param password password of the user 
+     * @return true if login is successful and false if login failed
+     * @throws IOException when file to read from doesn't exist
+     */
     public boolean login(String idNum, String password) throws IOException {
         loadProperties(users);
         if (searchUser(idNum)==true) {
@@ -100,11 +147,19 @@ public class User{
         }       
     }
     
+    /**
+     *lets the current user log out 
+     */
     public void logout() {
         current = null;
         System.out.println("Logout succesful.");
     }   
     
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args)throws IOException{
         User test = new User("brian", "12345", "100");
         User test2 = new User("brian1", "123456", "100");
