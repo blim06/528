@@ -12,6 +12,10 @@ package coe528.mdp;
 public class Chequeing extends Account {
     
     public static int cheqBal;
+
+    public Chequeing(int amount) {
+        this.cheqBal = amount;
+    }    
     
     @Override
     public void deposit(int amount) {

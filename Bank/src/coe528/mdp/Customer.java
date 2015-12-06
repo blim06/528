@@ -5,21 +5,47 @@
  */
 package coe528.mdp;
 
+import java.io.IOException;
+
 /**
  *
  * @author Brian
  */
 public class Customer extends User{
-        
-    public Customer(String name, String password, String accType, int cheqBalance, int savingBalance) {
-        super(name, password, accType);
-        if (cheqBalance >= 20 && savingBalance >= 20) {
-            this.accType = "Chequing + Savings";
-            this.cheqBalance = cheqBalance;
-            this.savingBalance = savingBalance;
-        } else {
-            System.err.println("You must have funds greater or equal to 20$ in both accounts.");
-        }
+    
+    private Chequeing chequeing;
+    private Saving saving;
+    
+    public Customer(String name, String password, String balance) throws IOException {
+        super(name, password, balance);
     }
+    
+    public void createChequeing(int amount) {
+        Chequeing created = new Chequeing(amount);
+        if (amount<=Integer.parseInt(balance))            
+            chequeing = created;            
+        else 
+            System.err.println("Insufficient funds.");
+    }
+    
+    public void createSaving(int amount) {
+        Saving created = new Saving(amount);
+        if (amount<=Integer.parseInt(balance))            
+            saving = created;            
+        else 
+            System.err.println("Insufficient funds.");        
+    }  
+    
+    public static void main(String[] args) throws IOException {
+        Customer brian = new Customer("brian","12345","100");
+        brian.createChequeing(50);
+        brian.createSaving(50);
+        System.out.println(brian.chequeing.getCheqBal());
+        System.out.println(brian.saving.getSavBal());
+    }
+    
+    
+        
+
     
 }

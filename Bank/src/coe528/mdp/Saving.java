@@ -12,6 +12,10 @@ package coe528.mdp;
 public class Saving extends Account {
     
     public static int savBal;
+
+    public Saving(int amount) {
+        this.savBal=amount;
+    }    
     
     @Override
     public void deposit(int amount) {

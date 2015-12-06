@@ -11,14 +11,8 @@ package coe528.mdp;
  */
 public abstract class Account {    
    
-    public void deposit(int amount) {
-        
-    }
+    public abstract void deposit(int amount);
     
-    public void withdraw(int amount) {
-        
-    }
-    
-   
+    public abstract void withdraw(int amount);
     
 }

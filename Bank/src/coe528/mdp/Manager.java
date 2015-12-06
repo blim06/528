@@ -5,16 +5,26 @@
  */
 package coe528.mdp;
 
+import java.io.IOException;
+
 /**
  *
  * @author Brian
  */
 public class Manager extends User{
-    
-    public Manager(String name, String password, String accType) {
-        super(name, password, accType);
-        this.name = "admin";
-        this.password = "admin";
-        this.accType = "Manager";
+
+    public Manager(String name, String password, String balance) throws IOException {
+        super(name, password, balance);
     }
+    
+    public void createCustomer(String name, String password, String balance) throws IOException {
+        Customer created = new Customer(name, password, balance);        
+    }
+    
+    public void deleteCustomer(String idNum) throws IOException {
+        loadProperties(users);
+        users.remove(idNum);
+        saveProperties(users);        
+    }
+
 }

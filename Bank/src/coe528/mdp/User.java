@@ -6,10 +6,13 @@
 package coe528.mdp;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Properties;
 
 /**
  *
@@ -17,16 +20,20 @@ import java.util.Scanner;
  */
 public class User{
     
-    private String name;
-    private String idNum;
-    private String password;
-    private String balance;    
-    String file = "users.txt";
+    protected String name;
+    protected String idNum;
+    protected String password;
+    protected String balance;    
+    private static final File file = new File("C:\\Users\\bl\\Documents\\GitHub\\528\\Bank\\src\\coe528\\mdp\\users.properties");
     private ArrayList<User> database = new ArrayList<User>();
     private User current;
     Random rand = new Random();
+    Properties users = new Properties();
+    FileOutputStream output;
+           
     
-    public User(String name, String password, String balance) {
+    public User(String name, String password, String balance) throws IOException {
+        loadProperties(users);
         String num;
         this.name=name;
         num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
@@ -38,65 +45,71 @@ public class User{
         idNum=num;
         this.password=password;
         this.balance=balance;
+        users.setProperty(idNum, password+","+name+","+balance);
+        saveProperties(users);
         database.add(this);
+    }
+    
+    static void loadProperties(Properties p)throws IOException
+    {
+            FileInputStream input=new FileInputStream(file);
+            p.load(input);
+            input.close();
+}
+    
+    public static void saveProperties(Properties p)throws IOException
+    {
+            FileOutputStream output = new FileOutputStream(file);
+            p.store(output,"Properties");
+            output.close();
     }
     
     public void changePassword(String password) {
         current.password = password;
-    }
+    }    
     
-    public boolean loadFile() {
-        try {
-            File F = new File(file);
-            Scanner scanner = new Scanner(F);
-            String user;
-
-            while (scanner.hasNext()) {
-                user = scanner.next();
-                if (user != "\n") {
-                    idNum.add(user);
-                    password.add(scanner.next());
-                    name.add(scanner.next());
-                    balance.add(scanner.next());
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("IO Exception");
+    public boolean searchUser(String idNum) throws IOException {
+        loadProperties(users);
+        if (users.getProperty(idNum)!=null)  {
+            System.out.println("The account #: " + idNum + ", exists.");
+            return true;                       
         }
-
+        System.err.println("No accounts exist with the following id: " + idNum);
         return false;
     }
     
-    public int searchUser(String name) {
-        String temp = "";
-        for (int i = 0; i<database.size(); i++) {
-            temp = database.get(i).name;
-            if (name.equalsIgnoreCase(temp)) {
-                return i;
-            }
-        }
-        System.err.println("No accounts exist with the following name: " + name);
-        return 0;
-    }
-    
         
-    public boolean login(String name, String password) {
-        int i = searchUser(name);
-        String temp = database.get(i).password;
-        if (temp == password) {
-            current = database.get(i);
-            System.out.println("Login successful.");
-            return true;
+    public boolean login(String idNum, String password) throws IOException {
+        loadProperties(users);
+        if (searchUser(idNum)==true) {
+            String[] currentUser = users.getProperty(idNum).split(",");
+            if (password.equals(currentUser[0])) {         
+                current.idNum=idNum;
+                current.password=currentUser[0];
+                current.name=currentUser[1];
+                current.balance=currentUser[2];
+                System.out.println("Login successful.");
+                return true;
+            } else {
+                System.err.println("Login failed.");
+                return false;
+            }
         } else {
             System.err.println("Login failed.");
             return false;
-        }
+        }       
     }
     
     public void logout() {
         current = null;
         System.out.println("Logout succesful.");
     }   
+    
+    public static void main(String[] args)throws IOException{
+        User test = new User("brian", "12345", "100");
+        User test2 = new User("brian1", "123456", "100");
+
+    }
     
  
 }
