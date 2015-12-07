@@ -14,6 +14,7 @@ public class ATM  {
     
     public ATM(User u) throws IOException{
         current_user=u;
+        selectAccount();
         
         
         
@@ -193,7 +194,6 @@ public class ATM  {
     User test = new User("Brian", "12345", "100");
     ATM testing = new ATM(test);
     //User.loadProperties(test);
-    CreditMenu();
 }
     
 }
