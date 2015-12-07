@@ -15,8 +15,8 @@ public class Customer extends User{
     
     private Chequeing chequeing;
     private Saving saving;
-    
-    public Customer(String name, String password, String balance) throws IOException {
+
+    public Customer(String name, String password, String balance, State state) throws IOException {
         super(name, password, balance);
     }
     
@@ -36,8 +36,23 @@ public class Customer extends User{
             System.err.println("Insufficient funds.");        
     }  
     
+     public State applyState (State p) {
+        State goodStanding = new GoodStanding();
+        State frozen = new Frozen();
+        Context cxt = new Context();
+        
+        if (Saving.savBal<0 || Chequeing.cheqBal<0) {
+            cxt.setState(frozen);
+            return p;
+        } else {
+            cxt.setState(goodStanding);
+            return p;
+        }   
+    }
+    
     public static void main(String[] args) throws IOException {
-        Customer brian = new Customer("brian","12345","100");
+        State goodStanding = new GoodStanding();
+        Customer brian = new Customer("brian","12345","100", goodStanding);
         brian.createChequeing(50);
         brian.createSaving(50);
         System.out.println(brian.chequeing.getCheqBal());

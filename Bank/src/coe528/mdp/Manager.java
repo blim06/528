@@ -26,5 +26,16 @@ public class Manager extends User{
         users.remove(idNum);
         saveProperties(users);        
     }
+    
+    public void freezeCustomer(State state) throws IOException {
+        Context cxt = new Context();
+        State frozen = new Frozen();
+        cxt.setState(frozen);
+    }
+    public void unfreezeCustomer(State state) throws IOException {
+        Context cxt = new Context();
+        State goodstanding = new GoodStanding();
+        cxt.setState(goodstanding);
+    }
 
 }
