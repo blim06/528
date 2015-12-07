@@ -14,10 +14,7 @@ public class ATM  {
     
     public ATM(User u) throws IOException{
         current_user=u;
-        selectAccount();
-        
-        
-        
+        selectAccount();  
         
     }
     public static void selectAccount(){

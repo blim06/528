@@ -8,6 +8,31 @@ public class Credit {
     private final long thirtyDayTime=2592000000L;
     private long baseTime=1449446400000L;  //current time @dec,1,2015
     private static long currentTime=System.currentTimeMillis();
+    
+    private static int cycles=1;
+    private static double payRate;
+    private double balance = 2500-crLimit;
+    
+    public void cycle() {
+        if ((currentTime-baseTime*cycles)>=thirtyDayTime) { 
+           cycles++;
+       }
+    }
+    
+    public double pay(double amount) {
+        if ((currentTime-baseTime*cycles)>=thirtyDayTime) { 
+            payRate=1.20;
+            
+//           amount=amount*1.20;
+       }
+    }
+    
+    public Credit() {
+        cycle();
+    }
+   
+    
+    
     //This section is about paying up your credit card balance
     public void pay_balance(double amount) {
         if (amount > 0 && crLimit < 2500) {

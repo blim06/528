@@ -24,6 +24,10 @@ public class OnlineBanking implements Bank {
         selectAccount();
         
     }
+
+    /**
+     *
+     */
     public static void selectAccount(){
         
         System.out.println("Which operation would you like to access?");
@@ -36,6 +40,9 @@ public class OnlineBanking implements Bank {
         menuAccount();
     }
   
+    /**
+     *
+     */
     public static void menuAccount(){
 
         Scanner account = new Scanner(System.in);
