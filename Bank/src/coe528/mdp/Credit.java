@@ -7,7 +7,9 @@ package coe528.mdp;
 public class Credit {
       
     public static int crLimit = 2500;
-    public int t;//number of days for paying the balance
+    private final long thirtyDayTime=currentTime-2592000000L;
+    private long baseTime=currentTime-518400000;                //1448748000000;  //current time @dec,1,2015
+    private static long currentTime=System.currentTimeMillis();
     
     //This section is about paying up your credit card balance
     public void pay_balance(int amount) {
@@ -27,9 +29,9 @@ public class Credit {
         } else if (amount > crLimit) {
             System.err.println("Over credit card limit.");
         }
-        if(t>30){
-            amount = amount * 1.20;//if paying balance passed 30 days ,20%intrests add to the balance
-        }
+        if ((currentTime-baseTime)>=thirtyDayTime) { 
+           amount=amount*1.20;
+       }
     }
 
     public static int getCrBal() {
