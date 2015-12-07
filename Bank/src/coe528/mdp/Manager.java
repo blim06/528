@@ -11,39 +11,30 @@ import java.io.IOException;
  *
  * @author Brian
  */
-public class Manager extends User{
-    
-//    private static Manager instance;           
-//    public Manager(String name, String password, String balance) throws IOException {
-//        super(name, password, balance);
-//    }                        
-//    public static Manager getInstance() throws IOException{        
-//       if (instance == null)                   
-//           instance = new Manager("admin", "admin", "10000");            
-//       return instance;                           
-//    }
+public class Manager extends User{    
 
-    /**
+
+    /**A Manager is created with the following parameters:<code>name</code>,
+     * <code>password</code>, and <code>balance</code>.
      *
-     * @param name
-     * @param password
-     * @param balance
-     * @throws IOException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws ClassNotFoundException
+     * @param name name of manager created
+     * @param password password of manager created
+     * @param balance balance of manager created
+     * @throws IOException when file to read and write to doesn't exist
      */
     
-    public Manager(String name, String password, String balance) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public Manager(String name, String password, String balance) throws IOException {
         super(name, password, balance);        
     }
     
-    /**
+    /**Loads the database with customers and creates a new customer
+     * based on the specified <code>name</code>, <code>password</code>, and
+     * <code>balance</code>. Saves all changes to the database.
      *
-     * @param name
-     * @param password
-     * @param balance
-     * @throws IOException
+     * @param name name of new customer
+     * @param password password of new customer
+     * @param balance balance of new customer
+     * @throws IOException when file to read and write to doesn't exist
      */
     public void createCustomer(String name, String password, String balance) throws IOException {
         loadProperties(users);
@@ -52,10 +43,12 @@ public class Manager extends User{
         saveProperties(users);
     }
     
-    /**
+    /**Loads the database with customers. If a customer with the
+     * <code>idNum</code> exists, the manager delete the customer
+     * and saves the changes.
      *
-     * @param idNum
-     * @throws IOException
+     * @param idNum ID of customer to be deleted
+     * @throws IOException when file to read and write to doesn't exist
      */
     public void deleteCustomer(String idNum) throws IOException {
         loadProperties(users);

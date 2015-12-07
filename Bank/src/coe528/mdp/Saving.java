@@ -12,23 +12,23 @@ package coe528.mdp;
 public class Saving extends Account {
     
     /**
-     *
+     *savings account balance
      */
     public static int savBal;
 
-    /**
+    /**Creates a savings account with the following
+     * <code>amount</code>.
      *
-     * @param amount
+     * @param amount balance that account is created with
      */
     public Saving(int amount) {
         this.savBal=amount;
     }    
-    
-    
 
-    /**
+    /**Deposits <code>amount</code> into savings account.
+     * Error is produced if amount is less than 0.
      *
-     * @param amount
+     * @param amount balance to be deposited into account
      */
     @Override
     public void deposit(int amount) {
@@ -40,9 +40,11 @@ public class Saving extends Account {
         }
     }
     
-    /**
+    /**Checks if there is a sufficient balance to be withdrew from the
+     * savings account. Error is produced when amount withdrew exceeds
+     * the balance.
      *
-     * @param amount
+     * @param amount balance to be withdrew
      */
     @Override
     public void withdraw(int amount) {
@@ -54,9 +56,10 @@ public class Saving extends Account {
         }    
     }
     
-    /**
+    /**Transfers <code>amount</code> to the chequeing account from savings.
+     * If there are insufficient funds, transfer fails and an error is produced.
      *
-     * @param amount
+     * @param amount amount to be transfered from savings to chequeing
      */
     public void transferSav2Cheq(int amount) {        
         if (Saving.savBal >= amount) {
@@ -67,20 +70,20 @@ public class Saving extends Account {
         }
     }
 
-    /**
+    /**return savings account balance
      *
-     * @return
+     * @return savings account balance
      */
     public static int getSavBal() {
         return savBal;
     }
 
-    /**
+    /**Sets savings account to <code>amount</code>
      *
-     * @param savBal
+     * @param amount new balance account is set to
      */
-    public static void setSavBal(int savBal) {
-        Saving.savBal = savBal;
+    public static void setSavBal(int amount) {
+        Saving.savBal = amount;
     }    
     
 }

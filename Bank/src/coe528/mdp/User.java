@@ -20,11 +20,34 @@ import java.util.Properties;
  */
 public class User{
     
+    /**
+     *name of the user
+     */
     protected String name;
+
+    /**
+     *unique ID number assigned to each customer
+     */
     protected String idNum;
+
+    /**
+     *password to their account
+     */
     protected String password;
+
+    /**
+     *balance of account
+     */
     protected String balance; 
+
+    /**
+     *chequeing balance of account
+     */
     protected String cheqBal;
+
+    /**
+     *savings balance of account
+     */
     protected String savBal;    
     private static final File file = new File("C:\\Users\\Brian\\Documents\\GitHub\\528\\Bank\\src\\coe528\\mdp\\users.properties");
     private User current;
@@ -33,12 +56,16 @@ public class User{
     FileOutputStream output;
            
     /**
-     *Creates an instantance of User with inputs name,
+     *When a user is created, a random number is generated which will serve as their <code>idNum</code>.
+     * That random number is check to make sure no other users have the same <code>idNum</code> and it
+     * is finalized when the number is unique. We print out this number for the user to record down.
+     * The parameters the user entered for the name, password and balance is added to the database and 
+     * then saved.     
      * 
-     * @param name
-     * @param password
-     * @param balance
-     * @throws IOException
+     * @param name name of user created
+     * @param password password of user created
+     * @param balance balance of user created
+     * @throws IOException when file to read and write to doesn't exist
      */
     public User(String name, String password, String balance) throws IOException {
         loadProperties(users);
@@ -63,7 +90,7 @@ public class User{
     /**Loads the database of registered users
      * 
      * @param p properties file containing user information
-     * @throws IOException 
+     * @throws IOException when file to read from doesn't exist
      */
     
     public static void loadProperties(Properties p) throws IOException {
@@ -72,6 +99,13 @@ public class User{
             input.close();
 }
     
+    /**When there are any changes to the current user's information,
+     * this method will save the change to the database
+     *
+     * @param p properties file containing user information
+     * @param idNum user ID whose information is to be updated
+     * @throws IOException when file to read and write to doesn't exist
+     */
     public void updateProperties(Properties p, String idNum) throws IOException {
         loadProperties(users);
         users.setProperty(idNum, current.password+","+current.name+","+current.balance+","+current.cheqBal+","+current.savBal);        
@@ -81,7 +115,7 @@ public class User{
     /**Saves any changes done to the databases of users
      *
      * @param p properties file containing user information
-     * @throws IOException
+     * @throws IOException when file to write to doesn't exist
      */
     public static void saveProperties(Properties p) throws IOException {
             FileOutputStream output = new FileOutputStream(file);
@@ -115,7 +149,9 @@ public class User{
         return false;
     }
     
-    /**
+    /**If the <code>idNum</code> inputted exists, it checks if the password
+     * matches. When the user is successfully logged in, it stores the information 
+     * into an array.   
      *
      * @param idNum id number of the user trying to login
      * @param password password of the user 
@@ -153,11 +189,7 @@ public class User{
         System.out.println("Logout succesful.");
     }   
     
-    /**
-     *
-     * @param args
-     * @throws IOException
-     */
+    
     public static void main(String[] args)throws IOException{
         User test = new User("brian", "12345", "100");
         User test2 = new User("brian1", "123456", "100");
