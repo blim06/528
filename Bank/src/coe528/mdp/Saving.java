@@ -11,12 +11,25 @@ package coe528.mdp;
  */
 public class Saving extends Account {
     
+    /**
+     *
+     */
     public static int savBal;
 
+    /**
+     *
+     * @param amount
+     */
     public Saving(int amount) {
         this.savBal=amount;
     }    
     
+    
+
+    /**
+     *
+     * @param amount
+     */
     @Override
     public void deposit(int amount) {
         if (amount > 0) {
@@ -27,6 +40,10 @@ public class Saving extends Account {
         }
     }
     
+    /**
+     *
+     * @param amount
+     */
     @Override
     public void withdraw(int amount) {
         if (Saving.savBal >= amount) {
@@ -37,6 +54,10 @@ public class Saving extends Account {
         }    
     }
     
+    /**
+     *
+     * @param amount
+     */
     public void transferSav2Cheq(int amount) {        
         if (Saving.savBal >= amount) {
         Chequeing.cheqBal+=amount;
@@ -46,10 +67,18 @@ public class Saving extends Account {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getSavBal() {
         return savBal;
     }
 
+    /**
+     *
+     * @param savBal
+     */
     public static void setSavBal(int savBal) {
         Saving.savBal = savBal;
     }    

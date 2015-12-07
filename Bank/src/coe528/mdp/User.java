@@ -20,26 +20,13 @@ import java.util.Properties;
  */
 public class User{
     
-    /**
-     *
-     */
     protected String name;
-
-    /**
-     *
-     */
     protected String idNum;
-
-    /**
-     *
-     */
     protected String password;
-
-    /**
-     *
-     */
-    protected String balance;    
-    private static final File file = new File("C:\\Users\\bl\\Documents\\GitHub\\528\\Bank\\src\\coe528\\mdp\\users.properties");
+    protected String balance; 
+    protected String cheqBal;
+    protected String savBal;    
+    private static final File file = new File("C:\\Users\\Brian\\Documents\\GitHub\\528\\Bank\\src\\coe528\\mdp\\users.properties");
     private User current;
     Random rand = new Random();
     Properties users = new Properties();
@@ -64,8 +51,11 @@ public class User{
         idNum=num;
         this.password=password;
         this.balance=balance;
-        users.setProperty(idNum, password+","+name+","+balance);
+        cheqBal="0";
+        savBal="0";
+        users.setProperty(idNum, password+","+name+","+balance+","+cheqBal+","+savBal);
         saveProperties(users);
+        
     }
     
     /**Loads the database of registered users
@@ -74,22 +64,26 @@ public class User{
      * @throws IOException 
      */
     
-    static void loadProperties(Properties p)throws IOException
-    {
+    public static void loadProperties(Properties p) throws IOException {
             FileInputStream input=new FileInputStream(file);
             p.load(input);
             input.close();
 }
+    
+    public void updateProperties(Properties p, String idNum) throws IOException {
+        loadProperties(users);
+        users.setProperty(idNum, current.password+","+current.name+","+current.balance+","+current.cheqBal+","+current.savBal);        
+        saveProperties(users);
+    }
     
     /**Saves any changes done to the databases of users
      *
      * @param p properties file containing user information
      * @throws IOException
      */
-    public static void saveProperties(Properties p)throws IOException
-    {
+    public static void saveProperties(Properties p) throws IOException {
             FileOutputStream output = new FileOutputStream(file);
-            p.store(output,"User data");
+            p.store(output,"User data- Format(idNum=password,name,balance,cheqBal,savBal)");
             output.close();
     }
     
@@ -135,6 +129,8 @@ public class User{
                 current.password=currentUser[0];
                 current.name=currentUser[1];
                 current.balance=currentUser[2];
+                current.cheqBal=currentUser[3];
+                current.savBal=currentUser[4];
                 System.out.println("Login successful.");
                 return true;
             } else {
@@ -163,6 +159,7 @@ public class User{
     public static void main(String[] args)throws IOException{
         User test = new User("brian", "12345", "100");
         User test2 = new User("brian1", "123456", "100");
+        
 
     }
     

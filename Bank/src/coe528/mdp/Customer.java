@@ -15,11 +15,17 @@ public class Customer extends User{
     
     private Chequeing chequeing;
     private Saving saving;
+    private Credit credit;
     
     public Customer(String name, String password, String balance) throws IOException {
         super(name, password, balance);
+        System.out.println("Your ID number is: " + this.idNum);
     }
     
+    /**
+     *
+     * @param amount
+     */
     public void createChequeing(int amount) {
         Chequeing created = new Chequeing(amount);
         if (amount<=Integer.parseInt(balance))            
@@ -27,7 +33,11 @@ public class Customer extends User{
         else 
             System.err.println("Insufficient funds.");
     }
-    
+        
+    /**
+     *
+     * @param amount
+     */
     public void createSaving(int amount) {
         Saving created = new Saving(amount);
         if (amount<=Integer.parseInt(balance))            
@@ -36,6 +46,19 @@ public class Customer extends User{
             System.err.println("Insufficient funds.");        
     }  
     
+    /**
+     *
+     */
+    public void createCredit() {
+        Credit created = new Credit();
+        credit = created;
+    }
+    
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Customer brian = new Customer("brian","12345","100");
         brian.createChequeing(50);
@@ -43,9 +66,5 @@ public class Customer extends User{
         System.out.println(brian.chequeing.getCheqBal());
         System.out.println(brian.saving.getSavBal());
     }
-    
-    
-        
-
     
 }
