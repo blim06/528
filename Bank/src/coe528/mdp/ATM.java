@@ -1,13 +1,24 @@
 package coe528.mdp;
 
 import java.util.Scanner;
-
-/**
+import java.io.IOException;
+/*
  *
  * @author Gelareh
  */
 public class ATM  {
 
+    //private User test;
+    public static User current_user;
+    
+    
+    public ATM(User u) throws IOException{
+        current_user=u;
+        
+        
+        
+        
+    }
     public static void selectAccount(){
         
         System.out.println("Which account would you like to access?");
@@ -63,6 +74,7 @@ public class ATM  {
             {
             case 1:
                 c.getCheqBal();
+                System.out.println("Your balance is: "+current_user.balance);
                 break;
             case 2:
                 System.out.println("\nEnter amount:");
@@ -109,6 +121,7 @@ public class ATM  {
             {
             case 1:
                 s.getSavBal();
+                System.out.println("Your balance is: "+current_user.balance);
                 break;
             case 2:
                 System.out.println("\nEnter amount:");
@@ -155,6 +168,7 @@ public class ATM  {
             {
             case 1:
                 cr.getCrBal();
+                System.out.println("Your balance is: "+current_user.balance);
                 break;
             case 2:
                 System.out.println("\nEnter amount:");
@@ -175,5 +189,11 @@ public class ATM  {
                 System.out.println("\nThank you for using this ATM!!! goodbye");
             }
         } 
+    public static void main(String[] args)throws IOException{
+    User test = new User("Brian", "12345", "100");
+    ATM testing = new ATM(test);
+    //User.loadProperties(test);
+    CreditMenu();
+}
     
 }
