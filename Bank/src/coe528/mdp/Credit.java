@@ -5,8 +5,8 @@
 public class Credit {
 
     public static int crLimit = 2500;  
-    private final long thirtyDayTime=currentTime-2592000000L;
-    private long baseTime=currentTime-518400000;                //1448748000000;  //current time @dec,1,2015
+    private final long thirtyDayTime=2592000000L;
+    private long baseTime=1449446400000L;  //current time @dec,1,2015
     private static long currentTime=System.currentTimeMillis();
     //This section is about paying up your credit card balance
     public void pay_balance(double amount) {
