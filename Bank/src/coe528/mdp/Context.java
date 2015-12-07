@@ -1,9 +1,9 @@
 package coe528.mdp;
 
-public class CreditScore {
+public class Context {
     private State state;
 
-   public CreditScore(){
+   public Context(){
       state = null;
    }
 

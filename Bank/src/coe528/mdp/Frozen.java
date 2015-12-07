@@ -1,9 +1,9 @@
 package coe528.mdp;
 
-public class BadStanding implements State {
+public class Frozen implements State {
     private int credit;
     
-    public void checkif(CreditScore creditscore) {
+    public void checkif(Context creditscore) {
       System.out.println("Account is in bad standing");
       creditscore.setState(this);	
    }

@@ -1,7 +1,7 @@
 package coe528.mdp;
 
 public class GoodStanding implements State {
-     public void checkif(CreditScore creditscore) {
+     public void checkif(Context creditscore) {
       System.out.println("Account is in good standing");
       creditscore.setState(this);	
    }

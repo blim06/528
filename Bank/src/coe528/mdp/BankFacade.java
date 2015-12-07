@@ -1,7 +1,6 @@
 package coe528.mdp;
 
 public class BankFacade {
-   private ExampleAction example;
    private ATM atm;
    private Account acc;
    private Chequeing cheq;
@@ -10,8 +9,7 @@ public class BankFacade {
    private Mortgage mortgage;
    
 
-     public BankFacade(ExampleAction example, ATM atm, Account acc, Chequeing cheq, Saving sav, Credit credit, Mortgage mortgage) {
-        this.example = example;
+     public BankFacade(ATM atm, Account acc, Chequeing cheq, Saving sav, Credit credit, Mortgage mortgage) {
         this.atm = atm;
         this.acc = acc;
         this.cheq = cheq;
@@ -21,9 +19,6 @@ public class BankFacade {
     }
    
    
-   public void doAction1(){
-      example.action();
-   }
 
   
 }
