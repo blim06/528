@@ -8,23 +8,16 @@ import java.util.Scanner;
  * @author Martin
  */
 public class OnlineBanking implements Bank {
-    private static User test;
-    
-    public static void main(String[] args)throws IOException{
-        String id;
-        String pw;
-        
-        System.out.println("Enter your idNum");
-        Scanner in1 = new Scanner(System.in);
-        id = in1.nextLine();
-        System.out.println("Enter your pw");
-        Scanner in2 = new Scanner(System.in);
-        pw = in2.nextLine();
-        test.login(id, pw);
-        selectAccount();
-        
+    public static User current_user;
+    public static User transfer_target;
+
+    public OnlineBanking(User u) {
+        current_user = u;
     }
-    public static void selectAccount(){
+    
+    
+
+    public void selectAccount(){
         
         System.out.println("Which operation would you like to access?");
         System.out.println();
@@ -36,7 +29,7 @@ public class OnlineBanking implements Bank {
         menuAccount();
     }
   
-    public static void menuAccount(){
+    public void menuAccount(){
 
         Scanner account = new Scanner(System.in);
         while (!account.hasNextInt()) {
@@ -63,9 +56,9 @@ public class OnlineBanking implements Bank {
         }
     }
     
-    public static void ChequingMenu()
+    public void ChequingMenu()
      {      
-            int cheq = Integer.parseInt(test.cheqBal);
+            int cheq = Integer.parseInt(current_user.cheqBal);
             Chequeing c = new Chequeing(cheq);
             int selection;
             int amount;
@@ -82,6 +75,7 @@ public class OnlineBanking implements Bank {
             {
             case 1:
                 c.getCheqBal();
+                System.out.println("Your balance is:"+current_user.balance);
                 break;
             case 2:
                 System.out.println("\nEnter amount to be transferred:");
@@ -97,9 +91,9 @@ public class OnlineBanking implements Bank {
                 System.exit(0);
             }
         }     
-    public static void SavingMenu()
+    public void SavingMenu()
      {
-            int sav = Integer.parseInt(test.savBal);
+            int sav = Integer.parseInt(current_user.savBal);
             Saving s = new Saving(sav);
             int selection;
             int amount;
@@ -116,6 +110,7 @@ public class OnlineBanking implements Bank {
             {
             case 1:
                 s.getSavBal();
+                System.out.println("Your balance is:"+current_user.balance);
                 break;
             case 2:
                 System.out.println("\nEnter amount to be transferred:");
@@ -132,7 +127,7 @@ public class OnlineBanking implements Bank {
             }
         } 
     
-    public static void CreditMenu()
+    public void CreditMenu()
      {
             Credit cr = new Credit();
             int selection;
@@ -151,6 +146,7 @@ public class OnlineBanking implements Bank {
             {
             case 1:
                 cr.getCrBal();
+                System.out.println("Your balance is:"+current_user.balance);
                 break;
             case 2:
                 System.out.println("\nEnter amount:");
@@ -173,15 +169,28 @@ public class OnlineBanking implements Bank {
             }
         } 
     
-    public static void MoneyXfer()
+    public void MoneyXfer()
      {
-            int cheq = Integer.parseInt(test.cheqBal);
+            int cheq = Integer.parseInt(current_user.cheqBal);
             Chequeing c = new Chequeing(cheq);
-            int sav = Integer.parseInt(test.savBal);
+            int sav = Integer.parseInt(current_user.savBal);
             Saving s = new Saving(sav);
             
+            String id2;
             int selection;
             int amount;
+            
+            System.out.println("Enter idNum of Account you wish to transfer to:");
+            Scanner in1 = new Scanner(System.in);
+            id2 = in1.nextLine();
+            
+            updateProperties(User.users, id2);
+            saveProperties(User.users);
+            
+            int cheq2 = Integer.parseInt(transfer_target.cheqBal);
+            Chequeing r = new Chequeing(cheq2);
+            int sav2 = Integer.parseInt(transfer_target.savBal);
+            Saving q = new Saving(sav2);
             
             System.out.println("\nMoney Transfer Menu);");
             System.out.println("1 - Transfer from Chequing:");
@@ -198,13 +207,13 @@ public class OnlineBanking implements Bank {
                 System.out.println("\nEnter amount to be transferred:");
                 Scanner input1 = new Scanner(System.in); 
                 amount = input1.nextInt();   
-                s.savAccTransfer(amount,s, q);
+                c.cheqAccTransfer(amount,c, r);
                 break;
             case 2:
                 System.out.println("\nEnter amount to be transferred:");
                 Scanner input2 = new Scanner(System.in); 
                 amount = input2.nextInt();
-                c.cheqAccTransfer(amount,c, r);
+                s.savAccTransfer(amount,s, q);
                 break;
             case 3:
                 selectAccount();
@@ -217,3 +226,4 @@ public class OnlineBanking implements Bank {
     
     
 }
+
