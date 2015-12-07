@@ -49,6 +49,8 @@ public class User{
             num=412 + Integer.toString(rand.nextInt(999999999)+ 100000000);
         }        
         idNum=num;
+        System.out.println("Your ID number is: " + this.idNum);
+        System.out.println("Please keep your ID and password safe as they're your login information!");
         this.password=password;
         this.balance=balance;
         cheqBal="0";

@@ -19,7 +19,6 @@ public class Customer extends User{
     
     public Customer(String name, String password, String balance) throws IOException {
         super(name, password, balance);
-        System.out.println("Your ID number is: " + this.idNum);
     }
     
     /**
