@@ -1,40 +1,27 @@
+package coe528.mdp;
+
 /**
- *
+ *the credit class is one of the accounts that users can have access to it and
+ * paying bills and their credit balance through executed methods
  * @author Gelareh
  */
 public class Credit {
 
+    /**
+     *initializing the parameter that we have used in class.
+     */
     public static int crLimit = 2500;  
     private final long thirtyDayTime=2592000000L;
-    private long baseTime=1449446400000L;  //current time @dec,1,2015
+    private long baseTime=1449446400000L;//1448748000000;  //current time @dec,1,2015
     private static long currentTime=System.currentTimeMillis();
     
-    private static int cycles=1;
-    private static double payRate;
-    private double balance = 2500-crLimit;
-    
-    public void cycle() {
-        if ((currentTime-baseTime*cycles)>=thirtyDayTime) { 
-           cycles++;
-       }
-    }
-    
-    public double pay(double amount) {
-        if ((currentTime-baseTime*cycles)>=thirtyDayTime) { 
-            payRate=1.20;
-            
-//           amount=amount*1.20;
-       }
-    }
-    
-    public Credit() {
-        cycle();
-    }
-   
-    
-    
-    //This section is about paying up your credit card balance
-    public void pay_balance(double amount) {
+
+    /**
+     *this method basically is basically about paying off the credit balance by 
+     * adding the amount to the credit limit which was initialized at the beginning of the class
+     * @param amount which is the double value that we have to purchase
+     */
+        public void pay_balance(double amount) {
         if (amount > 0 && crLimit < 2500) {
         Credit.this.crLimit += amount;
         System.out.println("Your current balance is: " + crLimit);
@@ -48,8 +35,14 @@ public class Credit {
        
     }
      
-    //This section is about purchasing with your credit card
-    public void bill_payment(double amount) {
+    
+
+    /**
+     *in this method users are able to pay their bill by subtracting the value of
+     * which is the amount from the credit limit
+     * @param amount is the value of bills 
+     */
+        public void bill_payment(double amount) {
         if (Credit.this.crLimit >= amount) {
         Credit.this.crLimit -= amount;
         System.out.println("Your current balance is: " + crLimit);
@@ -58,17 +51,20 @@ public class Credit {
         }    
     }
 
+    /**
+     *it gives the current balance (credit limits)of credit
+     * @return
+     */
     public static int getCrBal() {
         return crLimit;
     }
 
+    /**
+     *it set the current balance of credit to credit limit
+     * @param crLimit is the limit of the credit card
+     */
     public static void setCrBal(int crLimit) {
         Credit.crLimit = crLimit;
     }      
         
 }
-
-  
-    
-    
-    
