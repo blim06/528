@@ -11,8 +11,9 @@ import java.io.IOException;
  *
  * @author Brian
  */
-public class Manager extends User{    
-
+public class Manager extends User{   
+    
+    public static Customer target;
 
     /**A Manager is created with the following parameters:<code>name</code>,
      * <code>password</code>, and <code>balance</code>.
@@ -36,9 +37,9 @@ public class Manager extends User{
      * @param balance balance of new customer
      * @throws IOException when file to read and write to doesn't exist
      */
-    public void createCustomer(String name, String password, String balance) throws IOException {
+    public void createCustomer(String name, String password, String balance, State state) throws IOException {
         loadProperties(users);
-        Customer created = new Customer(name, password, balance);   
+        Customer created = new Customer(name, password, balance,state);   
         users.setProperty(created.idNum, created.password+","+created.name+","+created.balance+","+created.cheqBal+","+created.savBal);
         saveProperties(users);
     }
@@ -55,25 +56,19 @@ public class Manager extends User{
         users.remove(idNum);
         saveProperties(users);        
     }
-<<<<<<< HEAD
-    
-    public void freezeCustomer(State state) throws IOException {
-        Context cxt = new Context();
-        State frozen = new Frozen();
-        cxt.setState(frozen);
+
+    public void freezeCustomer() throws IOException {
+        target.state = new Frozen();
     }
-    public void unfreezeCustomer(State state) throws IOException {
-        Context cxt = new Context();
-        State goodstanding = new GoodStanding();
-        cxt.setState(goodstanding);
+    public void unfreezeCustomer() throws IOException {
+        target.state = new GoodStanding();
     }
 
-=======
+
 //public static void main(String[] args)throws IOException{
 //        Manager test = new Manager("Manager", "admin", "100");
 //
 //        
 //
 //    }
->>>>>>> origin/master
 }
