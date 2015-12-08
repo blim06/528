@@ -244,8 +244,8 @@ public class OnlineBanking implements Bank {
             System.out.println("\nMoney Transfer Menu");
             System.out.println("1 - Transfer from Chequing:");
             System.out.println("2 - Transfer from Saving:");      
-            System.out.println("4 - Back to Account Menu:");
-            System.out.println("5 - Terminate transaction:");
+            System.out.println("3 - Back to Account Menu:");
+            System.out.println("4 - Terminate transaction:");
             System.out.print("Choice: ");
             Scanner input = new Scanner(System.in);
             selection = input.nextInt();
