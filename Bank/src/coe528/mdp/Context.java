@@ -1,17 +1,32 @@
-package coe528.mdp;
+ackage coe528.mdp;
 
+/**
+ *
+ * @author mpieprzy
+ */
 public class Context {
     private State state;
 
-   public Context(){
+    /**
+     *Constructor (no state).
+     */
+    public Context(){
       state = null;
    }
 
-   public void setState(State state){
+    /**
+     *Sets object state.
+     * @param state of the object
+     */
+    public void setState(State state){
       this.state = state;		
    }
 
-   public State getState(){
+    /**
+     *Gets object state.
+     * @return
+     */
+    public State getState(){
       return state;
    }  
 }
