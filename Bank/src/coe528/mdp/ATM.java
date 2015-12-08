@@ -6,17 +6,40 @@ import java.io.IOException;
  *
  * @author Gelareh
  */
+
+/**
+ *the atm class gives an access to users to login to different account from 
+ * login method of user so they can implement the options such as withdraw deposits...etc.
+ * @author gelareh
+ */
+
 public class ATM  {
 
     //private User test;
-    public static User current_user;
+
+    /**
+     *creating a static variable current user from user class
+     */
+        public static User current_user;
     
-    
+    /**
+     *atm constructor which have u user as current user and then calls select account method
+     * @param u is equal to current user parameter which was created at the beginning of atm class
+     * @throws IOException
+     */
     public ATM(User u) throws IOException{
         current_user=u;
-        selectAccount();  
+        selectAccount();
+        
+        
+        
         
     }
+
+    /**
+     *this method is basically show the menu for accounts and it will call the
+     * menu account method after
+     */
     public static void selectAccount(){
         
         System.out.println("Which account would you like to access?");
@@ -28,6 +51,10 @@ public class ATM  {
         menuAccount();
     }
   
+    /**
+     *this method asks user to enter the number of desired  accounts
+     * and by entered number ,java goes to allocated account.
+     */
     public static void menuAccount(){
 
         Scanner account = new Scanner(System.in);
@@ -52,6 +79,11 @@ public class ATM  {
         }
     }
     
+    /**
+     *in this method user can access the option of chequing account by 
+     * entering the allocated number
+     * and at the end show the good bye quote.
+     */
     public static void ChequingMenu()
      {
             Chequeing c = new Chequeing();
@@ -99,6 +131,12 @@ public class ATM  {
                 System.out.println("\nThank you for using this ATM!!! goodbye");
             }
         }     
+
+    /**
+     *in saving method 6 option was implemented and by choosing 
+     * saving account user can have access to them .user only have to 
+     * type down the desired number
+     */
     public static void SavingMenu()
      {
             Saving s = new Saving();
@@ -147,6 +185,12 @@ public class ATM  {
             }
         } 
     
+    /**
+     *by login to credit account user get access to credit menu method which 
+     * has different options for credit card such as showing balance pay bills 
+     * an pay up balance which each have specific method in credit class so by
+     * entering number java runs the desired option
+     */
     public static void CreditMenu()
      {
             Credit cr = new Credit();
@@ -187,10 +231,18 @@ public class ATM  {
                 System.out.println("\nThank you for using this ATM!!! goodbye");
             }
         } 
+
+    /**
+     *this main method tests the atm class by creating new test type user with specific
+     * name password and balance and by running the class it will check the atm 
+     * class ant throws automatically exceptions
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args)throws IOException{
     User test = new User("Brian", "12345", "100");
     ATM testing = new ATM(test);
-    //User.loadProperties(test);
+    
 }
     
 }
