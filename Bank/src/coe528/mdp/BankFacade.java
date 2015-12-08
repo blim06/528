@@ -1,13 +1,33 @@
 package coe528.mdp;
 
+import java.util.Scanner;
+
+/**
+ *
+ * @author mpieprzy
+ */
 public class BankFacade {
    private ATM atm;
    private OnlineBanking ob;
    
-
-     public BankFacade() {
-        atm = new ATM();
-        ob = new OnlineBanking();
+    /**
+     *Constructor for the facade that is able to call the Online Banking and
+     * ATM classes.
+     * User chooses which class to call.
+     */
+    public BankFacade() {
+        System.out.println("Which operation would you like to access?");
+        System.out.println();
+        System.out.println("1 = ATM ");
+        System.out.println("2 = Online Banking");    
+        Scanner in1 = new Scanner(System.in);
+        String id = in1.nextLine();        
+        if (id.equals("1")) {
+            atm = new ATM();   
+        } else if (id.equals("2")) {
+            ob = new OnlineBanking();
+        } else
+            System.err.println("Option not available.");
     }
      
      public void selectAccountOB () {
@@ -22,24 +42,30 @@ public class BankFacade {
      public void menuAccountATM(){
         atm.menuAccount();
      }
-     public void ChequingMenuOB(){
-        ob.ChequingMenu();
+     public void chequingMenuOB(){
+        ob.chequingMenu();
      }
-     public void ChequingMenuATM(){
-        atm.ChequingMenu();
+     public void chequingMenuATM(){
+        atm.chequingMenu();
      }
-     public void SavingMenuOB(){
-        ob.SavingMenu();
+     public void savingMenuOB(){
+        ob.savingMenu();
      }
-     public void SavingMenuATM(){
-        atm.SavingMenu();
+     public void savingMenuATM(){
+        atm.savingMenu();
      }
-     public void CreditMenuOB(){
-        ob.CreditMenu();
+     public void creditMenuOB(){
+        ob.creditMenu();
      }
-     public void CreditMenuATM(){
-        atm.CreditMenu();
+     public void creditMenuATM(){
+        atm.creditMenu();
      }
-     public void MoneyXferOB(){
-        ob.MoneyXfer();
+     public void moneyXferOB(){
+        ob.moneyXfer();
      }
+     
+   
+   
+
+  
+}
