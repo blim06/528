@@ -4,8 +4,8 @@ package coe528.mdp;
 public interface Bank {
     public void selectAccount();
     public void menuAccount();
-    public void ChequingMenu();
-    public void SavingMenu();
-    public void CreditMenu();
-    public void MoneyXfer();
+    public void chequingMenu();
+    public void savingMenu();
+    public void creditMenu();
+    public void moneyXfer();
 }
